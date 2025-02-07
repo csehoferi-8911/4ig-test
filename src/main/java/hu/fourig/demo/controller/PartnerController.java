@@ -1,12 +1,14 @@
 package hu.fourig.demo.controller;
 
-import hu.fourig.demo.data.CreateOrSearchPartnerDto;
+import hu.fourig.demo.data.CreatePartnerDto;
 import hu.fourig.demo.data.PartnerDto;
 import hu.fourig.demo.service.PartnerService;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.method.annotation.StreamingResponseBody;
 
 import java.util.List;
 
@@ -24,7 +26,7 @@ public class PartnerController {
 
     @Operation(description = "Partner létrehozás")
     @PostMapping
-    public ResponseEntity<PartnerDto> createPartner(@RequestBody CreateOrSearchPartnerDto partner) {
+    public ResponseEntity<PartnerDto> createPartner(@RequestBody CreatePartnerDto partner) {
         return ResponseEntity.ok(partnerService.savePartner(partner));
     }
 
@@ -52,5 +54,13 @@ public class PartnerController {
 
         List<PartnerDto> partners = partnerService.searchPartners(name, email, phone, street, city, zipCode, number);
         return ResponseEntity.ok(partners);
+    }
+
+    @GetMapping("/export")
+    public ResponseEntity<StreamingResponseBody> exportPartners() {
+        return ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"partners.csv\"")
+                .contentType(org.springframework.http.MediaType.parseMediaType("text/csv"))
+                .body(partnerService.exportPartners());
     }
 }

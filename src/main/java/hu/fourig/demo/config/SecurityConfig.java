@@ -1,11 +1,9 @@
 package hu.fourig.demo.config;
 
-import hu.fourig.demo.data.Role;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
@@ -41,6 +39,7 @@ public class SecurityConfig {
                         .requestMatchers(SWAGGER_WHITELIST).permitAll()  // ✅ Swagger engedélyezése
                         .requestMatchers(AUTH_WHITELIST).permitAll()  // ✅ AuthController végpontok engedélyezése
                         .requestMatchers(HttpMethod.GET, "/api/partners").hasAnyRole("USER", "ADMIN")
+                        .requestMatchers(HttpMethod.GET, "/api/partners/export").hasAnyRole("USER", "ADMIN")
                         .requestMatchers(HttpMethod.GET, "/api/addresses").hasAnyRole("USER", "ADMIN")
 
                         .requestMatchers(HttpMethod.POST, "/api/partners").hasRole("ADMIN")
