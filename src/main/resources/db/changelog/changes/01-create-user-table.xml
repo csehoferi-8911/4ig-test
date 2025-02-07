@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.8.xsd">
+
+    <changeSet id="1" author="ferenc.cseho">
+        <createSequence sequenceName="user_fourig_seq" startValue="1" incrementBy="1"/>
+        <createTable tableName="user_fourig">
+            <column name="id" type="BIGINT" defaultValueComputed="nextval('user_fourig_seq')">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="username" type="VARCHAR(255)">
+                <constraints unique="true" nullable="false"/>
+            </column>
+            <column name="password" type="TEXT" />
+            <column name="role" type="VARCHAR(50)" />
+        </createTable>
+    </changeSet>
+
+</databaseChangeLog>

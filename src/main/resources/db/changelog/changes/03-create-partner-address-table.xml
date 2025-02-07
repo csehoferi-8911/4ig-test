@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="1" author="ferenc.cseho">
+        <createSequence sequenceName="partner_seq" startValue="1" incrementBy="1"/>
+        <createTable tableName="partner">
+            <column name="id" type="bigint" defaultValueComputed="nextval('partner_seq')">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="email" type="varchar(255)"/>
+            <column name="phone" type="varchar(50)"/>
+        </createTable>
+
+        <createSequence sequenceName="address_seq" startValue="1" incrementBy="1"/>
+        <createTable tableName="address">
+            <column name="id" type="bigint" defaultValueComputed="nextval('partner_seq')">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="street" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="city" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="zip_code" type="varchar(20)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="partner_address">
+            <column name="partner_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="address_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addForeignKeyConstraint
+                constraintName="partner_address_partner_fk"
+                baseTableName="partner_address"
+                baseColumnNames="partner_id"
+                referencedTableName="partner"
+                referencedColumnNames="id"/>
+
+        <addForeignKeyConstraint
+                constraintName="partner_address_address_fk"
+                baseTableName="partner_address"
+                baseColumnNames="address_id"
+                referencedTableName="address"
+                referencedColumnNames="id"/>
+
+        <addUniqueConstraint
+                tableName="partner_address"
+                columnNames="partner_id, address_id"
+                constraintName="unique_partner_id_address_id"/>
+    </changeSet>
+</databaseChangeLog>

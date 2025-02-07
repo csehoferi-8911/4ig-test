@@ -1,0 +1,21 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: myuser
+    password: mypassword
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: true
+  liquibase:
+    change-log: classpath:db/changelog/changelog-master.xml
+    enabled: true
+  docker:
+    compose:
+      enabled: true
+      file: docker-compose.yml
+
+app:
+  jwt-secret: 404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970
+  jwt-expiration: 86400000
