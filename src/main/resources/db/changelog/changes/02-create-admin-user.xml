@@ -11,6 +11,12 @@
             <column name="password" value="$2a$10$.A/eDimuuA5iWN6qBLDUqOK72/Vo8VbWPggO2510LgUQrkP1DFWnO"/>
             <column name="role" value="ADMIN"/>
         </insert>
+        <insert tableName="user_fourig">
+            <column name="id" valueComputed="nextval('user_fourig_seq')"/>
+            <column name="username" value="user"/>
+            <column name="password" value="$2a$10$uukeS7r5rUuJJeX37NdnZOiAH.RRX.Pj0y9MHiy1Hbqp44O87PI3y"/>
+            <column name="role" value="USER"/>
+        </insert>
     </changeSet>
 
 </databaseChangeLog>

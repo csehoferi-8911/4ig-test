@@ -32,6 +32,9 @@
             <column name="zip_code" type="varchar(20)">
                 <constraints nullable="false"/>
             </column>
+            <column name="number" type="varchar(20)">
+                <constraints nullable="false"/>
+            </column>
         </createTable>
 
         <createTable tableName="partner_address">

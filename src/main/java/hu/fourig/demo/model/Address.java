@@ -23,4 +23,7 @@ public class Address implements Serializable {
     @Column(nullable = false)
     private String zipCode;
 
+    @Column(nullable = false)
+    private String number;
+
 }

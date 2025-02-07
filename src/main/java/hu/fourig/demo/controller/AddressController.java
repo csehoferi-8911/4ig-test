@@ -1,9 +1,9 @@
 package hu.fourig.demo.controller;
 
 import hu.fourig.demo.data.AddressDto;
-import hu.fourig.demo.model.Address;
 import hu.fourig.demo.service.AddressService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -18,12 +18,12 @@ public class AddressController {
     private final AddressService addressService;
 
     @GetMapping
-    public List<AddressDto> getAllAddresses() {
-        return addressService.getAllAddresses();
+    public ResponseEntity<List<AddressDto>> getAllAddresses() {
+        return ResponseEntity.ok(addressService.getAllAddresses());
     }
 
     @GetMapping("/search")
-    public List<AddressDto> searchByCity(@RequestParam String city) {
-        return addressService.searchByCity(city);
+    public ResponseEntity<List<AddressDto>> searchByCity(@RequestParam String city) {
+        return ResponseEntity.ok(addressService.searchByCity(city));
     }
 }
