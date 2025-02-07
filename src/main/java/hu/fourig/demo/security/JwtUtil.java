@@ -6,6 +6,7 @@ import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -21,6 +22,9 @@ public class JwtUtil {
 
     @Value("${app.jwt-expiration}")
     private long jwtExpiration;
+
+    private final String TOKEN_HEADER = "Authorization";
+    private final String TOKEN_PREFIX = "Bearer ";
 
     public String generateToken(String username, Role role) {
         return Jwts.builder()
@@ -40,10 +44,18 @@ public class JwtUtil {
                 .getPayload();
     }
 
-    public boolean validateToken(String token) {
+    public String resolveToken(HttpServletRequest request) {
+
+        String bearerToken = request.getHeader(TOKEN_HEADER);
+        if (bearerToken != null && bearerToken.startsWith(TOKEN_PREFIX)) {
+            return bearerToken.substring(TOKEN_PREFIX.length());
+        }
+        return null;
+    }
+
+    public boolean validateToken(Claims claims) {
         try {
-            parseToken(token);
-            return true;
+            return claims.getExpiration().after(new Date());
         } catch (JwtException | IllegalArgumentException e) {
             return false;
         }
