@@ -17,13 +17,13 @@ public class AuthController {
     private final UserService userService;
 
 
-    @Operation(description = "Felhasználó létrehozás")
+    @Operation(summary = "Felhasználó létrehozás")
     @PostMapping("/register")
     public ResponseEntity<User> register(@RequestBody UserDto user) {
         return ResponseEntity.ok(userService.registerUser(user));
     }
 
-    @Operation(description = "Felhasználó bejelentkezés")
+    @Operation(summary = "Felhasználó bejelentkezés")
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginUserDto userDto) {
         return ResponseEntity.ok(userService.loginUser(userDto));

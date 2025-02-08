@@ -18,7 +18,6 @@ import java.util.List;
 public class AddressService {
     private final AddressRepository addressRepository;
     private final AddressMapper addressMapper;
-    private final PartnerRepository partnerRepository;
 
     public List<AddressDto> getAllAddresses() {
         return addressMapper.entitiesToDtos(addressRepository.findAll());

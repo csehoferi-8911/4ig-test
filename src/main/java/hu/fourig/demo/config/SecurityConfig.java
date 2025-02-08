@@ -40,6 +40,7 @@ public class SecurityConfig {
                         .requestMatchers(AUTH_WHITELIST).permitAll()  // ✅ AuthController végpontok engedélyezése
                         .requestMatchers(HttpMethod.GET, "/api/partners").hasAnyRole("USER", "ADMIN")
                         .requestMatchers(HttpMethod.GET, "/api/partners/export").hasAnyRole("USER", "ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/api/partners/upload").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.GET, "/api/addresses").hasAnyRole("USER", "ADMIN")
 
                         .requestMatchers(HttpMethod.POST, "/api/partners").hasRole("ADMIN")
