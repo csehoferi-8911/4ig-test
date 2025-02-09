@@ -1,6 +1,5 @@
 package hu.fourig.demo.repository;
 
-import hu.fourig.demo.data.AddressPartnerDTO;
 import hu.fourig.demo.model.Address;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
