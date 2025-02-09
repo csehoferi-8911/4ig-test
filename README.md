@@ -10,7 +10,7 @@ resource/template mappában található.
 ### Futtatáshoz szükséges rövid leírás
 
 * java 21, SpringBoot 3.4.2, maven
-* Alkalmazás indítása során Spring docker compose komponenssel elindítja az adatbázis is
+* Alkalmazás indítása során (mvn spring-boot:run vagy ideaból) Spring docker compose komponenssel elindítja az adatbázis is
 * liquibase adatbázis migrációhoz
 * swagger url: http://localhost:8080/swagger-ui/index.html#/
 * Először szükséges bejelentkezni:
